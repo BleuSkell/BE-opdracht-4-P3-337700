@@ -55,7 +55,7 @@
                                     </a>
                                 </td>
                                 <td class='text-center'>
-                                    <a href='<?= URLROOT . "/Magazijn/Leverantieinfo/$product->ProductId" ?>'>
+                                    <a href='<?= URLROOT . "/Magazijn/leverancier/$product->ProductId" ?>'>
                                         <i class='bi bi-question-lg darkbluequestionmark'></i>
                                     </a>
                                 </td>            

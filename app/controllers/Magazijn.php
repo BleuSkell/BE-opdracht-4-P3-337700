@@ -35,4 +35,13 @@ class Magazijn extends BaseController
 
         $this->view('magazijn/index', $data);
     }
+
+    public function leverancier()
+    {
+        $data = [
+            'title' => 'Leverings Informatie'
+        ];
+
+        $this->view('magazijn/leverancier', $data);
+    }
 }
