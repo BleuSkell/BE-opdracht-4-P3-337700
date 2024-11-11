@@ -39,8 +39,27 @@ class Magazijn extends BaseController
     public function leverancier()
     {
         $data = [
-            'title' => 'Leverings Informatie'
+            'title' => 'Leverings Informatie',
+            'message' => NULL,
+            'messageColor' => NULL,
+            'messageVisibility' => 'none',
+            'dataRows' => NULL
         ];
+
+        $result = $this->magazijnModel->getProductsByLeverancier();
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result;
+            var_dump($data['dataRows']);
+        }
 
         $this->view('magazijn/leverancier', $data);
     }
