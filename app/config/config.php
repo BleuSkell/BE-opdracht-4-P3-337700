@@ -3,7 +3,7 @@
  * De database verbindingsgegevens
  */
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'Jamin');
+define('DB_NAME', 'jamin_a');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
@@ -11,7 +11,7 @@ define('DB_PASS', '');
 /**
  * De naam van de virtualhost
  */
-define('URLROOT', 'http://www.jamin.local');
+define('URLROOT', 'http://www.jamin-a.nl');
 
 
 /**
