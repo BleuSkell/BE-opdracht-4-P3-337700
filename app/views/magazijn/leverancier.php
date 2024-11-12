@@ -17,7 +17,7 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <h3><?php echo $data['title']; ?></h3>
+            <h2><?php echo $data['title']; ?></h2>
         </div>
         <div class="col-2"></div>
     </div>
@@ -25,7 +25,12 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <h4>Naam Leverancier: <?= $data['dataRows'][0]->LeverancierNaam ?></h4>
+            <?php if (isset($data['dataRows'])) : ?>
+                <h5>Naam Leverancier: <?= $data['dataRows'][0]->LeverancierNaam ?></h5>
+                <h5>Contactpersoon Leverancier: <?= $data['dataRows'][0]->LeverancierContact ?></h5>
+                <h5>Leverancier nummer: <?= $data['dataRows'][0]->LeverancierNummer ?></h5>
+                <h5>Mobiel: <?= $data['dataRows'][0]->LeverancierMobiel ?></h5>
+            <?php endif; ?>
 
             <table class="table table-hover">
                 <thead>
@@ -39,7 +44,7 @@
                 <tbody>
                     <?php if (is_null($data['dataRows'])) { ?>
                               <tr>
-                                <td colspan='6' class='text-center'>Door een storing kunnen we op dit moment geen producten tonen uit het magazijn</td>
+                                <td colspan='6' class='text-center'><?= $data['message']; ?></td>
                               </tr>
                     <?php } else {                              
                               foreach ($data['dataRows'] as $product) { ?>
@@ -52,7 +57,8 @@
                     <?php } } ?>
                 </tbody>
             </table>
-            <a href="<?= URLROOT; ?>/homepages/index">Homepage</a>
+            <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
+            <a href="<?= URLROOT; ?>/magazijn/index">Magazijn</a>
         </div>
         <div class="col-2"></div>
     </div>

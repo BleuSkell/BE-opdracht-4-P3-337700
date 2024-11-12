@@ -24,6 +24,7 @@ BEGIN
     SELECT       PPL.Id                    AS      PPLId
                 ,PPL.LeverancierId         AS      PPLLeverancierId
                 ,PPL.ProductId             AS      PPLProductId
+                ,PPL.MagazijnId            AS      PPLMagazijnId
                 ,PPL.DatumLevering
                 ,PPL.Aantal
                 ,PPL.DatumEerstVolgendeLevering
@@ -31,9 +32,11 @@ BEGIN
                 ,PROD.Naam                  AS      ProductNaam
                 ,LEVER.Id                   AS      LeverId
                 ,LEVER.Naam                 AS      LeverancierNaam
-                ,LEVER.ContactPersoon
-                ,LEVER.LeverancierNummer
-                ,LEVER.Mobiel
+                ,LEVER.ContactPersoon       AS      LeverancierContact
+                ,LEVER.LeverancierNummer    AS      LeverancierNummer
+                ,LEVER.Mobiel               AS      LeverancierMobiel
+                ,MAGA.Id
+                ,MAGA.AantalAanwezig        AS      MagazijnAantal
 
     FROM        ProductPerLeverancier AS PPL
 
@@ -42,6 +45,9 @@ BEGIN
             
     INNER JOIN Leverancier AS LEVER
             ON LEVER.Id = PPL.LeverancierId
+
+    INNER JOIN Magazijn AS MAGA
+            ON MAGA.Id = PROD.Id
 
     WHERE   PPL.ProductId = productId     
             

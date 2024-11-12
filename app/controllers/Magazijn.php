@@ -48,8 +48,6 @@ class Magazijn extends BaseController
 
         $result = $this->magazijnModel->getProductsByLeverancier($productId);
 
-        var_dump($result);
-
         if (is_null($result)) {
             // Fout afhandelen
             $data['message'] = "Er is een fout opgetreden in de database";
@@ -57,7 +55,11 @@ class Magazijn extends BaseController
             $data['messageVisibility'] = "flex";
             $data['dataRows'] = NULL;
 
-            // header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else if ($result[0]->MagazijnAantal == 0) {
+            $data['message'] = "Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende levering is: " . $result[0]->DatumEerstVolgendeLevering;
+            $data['dataRows'] = NULL;
+            header('Refresh:4; url=' . URLROOT . '/magazijn/index');
         } else {
             $data['dataRows'] = $result;
         }
