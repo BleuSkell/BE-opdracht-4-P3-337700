@@ -67,7 +67,7 @@ class Magazijn extends BaseController
         $this->view('magazijn/leverancier', $data);
     }
 
-    public function allergeen()
+    public function allergeen($productId)
     {
         $data = [
             'title' => 'Overzicht allergenen',

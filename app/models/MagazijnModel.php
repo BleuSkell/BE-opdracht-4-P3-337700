@@ -50,7 +50,7 @@ class MagazijnModel
     public function getAllergeenByProduct($productId)
     {
         try {
-            $sql = "CALL spAllergeen($productId)";
+            $sql = "CALL spAllergenen($productId)";
 
             $this->db->query($sql);
 
