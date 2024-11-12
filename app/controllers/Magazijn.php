@@ -66,4 +66,31 @@ class Magazijn extends BaseController
 
         $this->view('magazijn/leverancier', $data);
     }
+
+    public function allergeen()
+    {
+        $data = [
+            'title' => 'Overzicht allergenen',
+            'message' => NULL,
+            'messageColor' => NULL,
+            'messageVisibility' => 'none',
+            'dataRows' => NULL
+        ];
+
+        $result = $this->magazijnModel->getAllergeenByProduct($productId);
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result;
+        }
+
+        $this->view('magazijn/allergeen', $data);
+    }
 }

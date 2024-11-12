@@ -50,7 +50,7 @@
                                 <td><?= $product->VerpakkingseenheidInKG ?></td>
                                 <td><?= $product->AantalAanwezig ?></td>
                                 <td class='text-center'>
-                                    <a href='<?= URLROOT . "/Magazijn/Allergeninfo/$product->ProductId" ?>'>
+                                    <a href='<?= URLROOT . "/Magazijn/allergeen/$product->ProductId" ?>'>
                                         <i class='bi bi-x-lg redcross'></i>
                                     </a>
                                 </td>
