@@ -86,7 +86,7 @@ class Magazijn extends BaseController
             $data['messageVisibility'] = "flex";
             $data['dataRows'] = NULL;
 
-            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+            // header('Refresh:3; url=' . URLROOT . '/Homepages/index');
         } else {
             $data['dataRows'] = $result;
         }
