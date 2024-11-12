@@ -17,7 +17,7 @@ DROP PROCEDURE IF EXISTS spGetProductByLeverancier;
 DELIMITER //
 
 CREATE PROCEDURE spGetProductByLeverancier(
-    IN pLeverancierId INT
+    productId INT UNSIGNED
 )
 BEGIN
 
@@ -43,7 +43,7 @@ BEGIN
     INNER JOIN Leverancier AS LEVER
             ON LEVER.Id = PPL.LeverancierId
 
-    WHERE PPL.LeverancierId = pLeverancierId
+    WHERE   PPL.ProductId = productId     
             
     ORDER BY PPL.DatumLevering ASC;
 

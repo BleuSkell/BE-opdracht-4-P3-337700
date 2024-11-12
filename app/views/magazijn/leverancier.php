@@ -25,9 +25,7 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            
-            <h3>Levergins Informatie</h3>
-            <h4>Naam Leverancier: <?=$data['dataRows']->LeverancierNaam?></h4>
+            <h4>Naam Leverancier: <?= $data['dataRows'][0]->LeverancierNaam ?></h4>
 
             <table class="table table-hover">
                 <thead>

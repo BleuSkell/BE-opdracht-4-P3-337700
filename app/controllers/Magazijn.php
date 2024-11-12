@@ -36,7 +36,7 @@ class Magazijn extends BaseController
         $this->view('magazijn/index', $data);
     }
 
-    public function leverancier()
+    public function leverancier($productId)
     {
         $data = [
             'title' => 'Leverings Informatie',
@@ -46,7 +46,9 @@ class Magazijn extends BaseController
             'dataRows' => NULL
         ];
 
-        $result = $this->magazijnModel->getProductsByLeverancier();
+        $result = $this->magazijnModel->getProductsByLeverancier($productId);
+
+        var_dump($result);
 
         if (is_null($result)) {
             // Fout afhandelen
@@ -55,10 +57,9 @@ class Magazijn extends BaseController
             $data['messageVisibility'] = "flex";
             $data['dataRows'] = NULL;
 
-            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+            // header('Refresh:3; url=' . URLROOT . '/Homepages/index');
         } else {
             $data['dataRows'] = $result;
-            var_dump($data['dataRows']);
         }
 
         $this->view('magazijn/leverancier', $data);

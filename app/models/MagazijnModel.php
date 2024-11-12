@@ -30,10 +30,10 @@ class MagazijnModel
         }
     }
 
-    public function getProductsByLeverancier()
+    public function getProductsByLeverancier($productId)
     {
         try {
-            $sql = "CALL spGetProductByLeverancier()";
+            $sql = "CALL spGetProductByLeverancier($productId)";
 
             $this->db->query($sql);
 
