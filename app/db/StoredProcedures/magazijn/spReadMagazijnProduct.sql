@@ -41,3 +41,5 @@ DELIMITER ;
 /**********debug code stored procedure***************
 CALL spReadMagazijnProduct();
 ****************************************************/
+
+/* leverancier, 
