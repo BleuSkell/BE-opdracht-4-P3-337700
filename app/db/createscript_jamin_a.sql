@@ -198,7 +198,6 @@ CREATE TABLE ProductPerLeverancier (
   ,DatumLevering DATE NOT NULL
   ,Aantal SMALLINT UNSIGNED NOT NULL
   ,DatumEerstVolgendeLevering DATE NULL DEFAULT NULL
-  ,Mobiel VARCHAR(100) NOT NULL
   ,IsActief BIT NOT NULL DEFAULT 1
   ,Opmerking VARCHAR(250) NULL DEFAULT NULL
   ,DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
