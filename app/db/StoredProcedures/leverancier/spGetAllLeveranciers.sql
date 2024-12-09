@@ -24,6 +24,7 @@ BEGIN
                 ,LEV.ContactPersoon
                 ,LEV.LeverancierNummer
                 ,LEV.Mobiel
+                ,PROD.Id                 AS ProductId
                 ,COUNT(DISTINCT PROD.Id) AS AantalVerschillendeProducten
 
     FROM        Leverancier AS LEV
