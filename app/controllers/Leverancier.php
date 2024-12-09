@@ -6,7 +6,7 @@ class Leverancier extends BaseController
 
     public function __construct()
     {
-        $this->leveracierModel = $this->model('LeverancierModel');
+        $this->leverancierModel = $this->model('LeverancierModel');
     }
 
     public function index()
@@ -19,7 +19,7 @@ class Leverancier extends BaseController
             'dataRows' => NULL
         ];
 
-        $result = $this->magazijnModel->getAllLeveranciers();
+        $result = $this->leverancierModel->getAllLeveranciers();
 
         if (is_null($result)) {
             // Fout afhandelen

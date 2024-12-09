@@ -19,42 +19,29 @@ DELIMITER //
 CREATE PROCEDURE spGetAllLeveranciers()
 BEGIN
 
-    SELECT       PPL.Id                    AS      PPLId
-                ,PPL.LeverancierId         AS      PPLLeverancierId
-                ,PPL.ProductId             AS      PPLProductId
-                ,PPL.MagazijnId            AS      PPLMagazijnId
-                ,PPL.DatumLevering
-                ,PPL.Aantal
-                ,PPL.DatumEerstVolgendeLevering
-                ,PROD.Id                    AS      ProductId
-                ,PROD.Naam                  AS      ProductNaam
-                ,LEVER.Id                   AS      LeverId
-                ,LEVER.Naam                 AS      LeverancierNaam
-                ,LEVER.ContactPersoon       AS      LeverancierContact
-                ,LEVER.LeverancierNummer    AS      LeverancierNummer
-                ,LEVER.Mobiel               AS      LeverancierMobiel
-                ,MAGA.Id
-                ,MAGA.AantalAanwezig        AS      MagazijnAantal
+    SELECT      LEV.Id                   AS LeverancierId
+                ,LEV.Naam
+                ,LEV.ContactPersoon
+                ,LEV.LeverancierNummer
+                ,LEV.Mobiel
+                ,COUNT(DISTINCT PROD.Id) AS AantalVerschillendeProducten
 
-    FROM        ProductPerLeverancier AS PPL
+    FROM        Leverancier AS LEV
 
-    INNER JOIN Product AS PROD
+    LEFT JOIN ProductPerLeverancier AS PPL
+            ON LEV.Id = PPL.LeverancierId
+            
+    LEFT JOIN Product AS PROD
             ON PROD.Id = PPL.ProductId
-            
-    INNER JOIN Leverancier AS LEVER
-            ON LEVER.Id = PPL.LeverancierId
 
-    INNER JOIN Magazijn AS MAGA
-            ON MAGA.Id = PROD.Id
-
-    WHERE   PPL.ProductId = productId     
+    GROUP BY  LEV.Id
             
-    ORDER BY PPL.DatumLevering ASC;
+    ORDER BY AantalVerschillendeProducten DESC;
 
 
 END //
 DELIMITER ;
 
 /**********debug code stored procedure***************
-CALL spGetProductByLeverancier();
+CALL spGetAllLeveranciers();
 ****************************************************/
