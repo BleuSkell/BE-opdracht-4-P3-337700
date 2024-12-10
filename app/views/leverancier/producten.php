@@ -49,17 +49,21 @@
                               </tr>
                     <?php } else {                              
                               foreach ($data['dataRows'] as $leverancier) { ?>
-                                <tr>
-                                <td><?= $leverancier->ProductNaam ?></td>
-                                <td><?= $leverancier->AantalAanwezig ?></td>
-                                <td><?= $leverancier->VerpakkingsEenheid ?></td>
-                                <td><?= $leverancier->LaatsteLevering ?></td>   
-                                <td class='text-center'>
-                                    <a href='<?= URLROOT . "/Leverancier/levering/$leverancier->LeverancierId" ?>'>
-                                        <i class='bi bi-question-lg darkbluequestionmark'></i>
-                                    </a>
-                                </td>          
-                                </tr>
+                                <?php if($data['message']) : ?>
+                                    <td colspan="6" class="text-center"><?=$data['message'];?></td>
+                                <?php else : ?>
+                                    <tr>
+                                    <td><?= $leverancier->ProductNaam ?></td>
+                                    <td><?= $leverancier->AantalAanwezig ?></td>
+                                    <td><?= $leverancier->VerpakkingsEenheid ?></td>
+                                    <td><?= $leverancier->LaatsteLevering ?></td>   
+                                    <td class='text-center'>
+                                        <a href='<?= URLROOT . "/Leverancier/levering/$leverancier->LeverancierId" ?>'>
+                                            <i class='bi bi-question-lg darkbluequestionmark'></i>
+                                        </a>
+                                    </td>          
+                                    </tr>
+                                <?php endif; ?>
                     <?php } } ?>
                 </tbody>
             </table>
