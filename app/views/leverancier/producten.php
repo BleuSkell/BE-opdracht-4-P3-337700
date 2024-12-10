@@ -59,7 +59,7 @@
                                     <td><?= $leverancier->LaatsteLevering ?></td>   
                                     <td class='text-center'>
                                         <a href='<?= URLROOT . "/Leverancier/levering/$leverancier->LeverancierId" ?>'>
-                                            <i class='bi bi-question-lg darkbluequestionmark'></i>
+                                            <i class='bi bi-plus'></i>
                                         </a>
                                     </td>          
                                     </tr>

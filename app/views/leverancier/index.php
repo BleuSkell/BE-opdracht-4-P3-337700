@@ -52,7 +52,7 @@
                                 <td><?= $leverancier->AantalVerschillendeProducten ?></td>
                                 <td class='text-center'>
                                     <a href='<?= URLROOT . "/Leverancier/producten/$leverancier->LeverancierId" ?>'>
-                                        <i class='bi bi-question-lg darkbluequestionmark'></i>
+                                        <i class='bi bi-box'></i>
                                     </a>
                                 </td>            
                                 </tr>
