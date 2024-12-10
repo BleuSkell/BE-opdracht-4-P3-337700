@@ -36,9 +36,10 @@
                 <thead>
                     <tr>
                         <th>Naam Product</th>
-                        <th>AantalInMagazijn</th>
-                        <th>VerpakkingsEenheid</th>
-                        <th>LaatsteLevering</th>
+                        <th>AantalIn Magazijn</th>
+                        <th>Verpakkings Eenheid</th>
+                        <th>Laatste Levering</th>
+                        <th>Nieuwe levering</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,12 +48,17 @@
                                 <td colspan='6' class='text-center'><?= $data['message']; ?></td>
                               </tr>
                     <?php } else {                              
-                              foreach ($data['dataRows'] as $product) { ?>
+                              foreach ($data['dataRows'] as $leverancier) { ?>
                                 <tr>
-                                <td><?= $product->ProductNaam ?></td>
-                                <td><?= $product->AantalAanwezig ?></td>
-                                <td><?= $product->VerpakkingsEenheid ?></td>
-                                <td><?= $product->LaatsteLevering ?></td>           
+                                <td><?= $leverancier->ProductNaam ?></td>
+                                <td><?= $leverancier->AantalAanwezig ?></td>
+                                <td><?= $leverancier->VerpakkingsEenheid ?></td>
+                                <td><?= $leverancier->LaatsteLevering ?></td>   
+                                <td class='text-center'>
+                                    <a href='<?= URLROOT . "/Leverancier/levering/$leverancier->LeverancierId" ?>'>
+                                        <i class='bi bi-question-lg darkbluequestionmark'></i>
+                                    </a>
+                                </td>          
                                 </tr>
                     <?php } } ?>
                 </tbody>
