@@ -112,19 +112,18 @@ class Leverancier extends BaseController
             if ($result) {
                 $data['message'] = "De nieuwe levering is succesvol toegevoegd.";
                 $data['messageColor'] = "success";
+                // Redirect terug naar leverancierspagina (of een andere locatie)
+                header('Location: ' . URLROOT . '/leverancier/producten');
             } else {
                 $data['message'] = "Er is een fout opgetreden bij het toevoegen van de levering.";
                 $data['messageColor'] = "danger";
             }
 
             $data['messageVisibility'] = "flex";
-
-            // Redirect terug naar leverancierspagina (of een andere locatie)
-            header('Location: ' . URLROOT . '/leverancier/index');
             exit;
         } else {
             // Indien geen POST, stuur de gebruiker terug naar leverancierspagina
-            header('Location: ' . URLROOT . '/leverancier/producten');
+            header('Location: ' . URLROOT . '/leverancier/index');
             exit;
         }
     }

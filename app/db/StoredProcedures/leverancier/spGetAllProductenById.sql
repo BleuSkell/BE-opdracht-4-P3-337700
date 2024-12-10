@@ -48,7 +48,7 @@ BEGIN
 
     WHERE   PPL.LeverancierId = LeverancierId     
             
-    ORDER BY PPL.DatumLevering ASC;
+    ORDER BY PPL.DatumLevering DESC;
 
 
 END //
