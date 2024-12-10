@@ -36,7 +36,7 @@
                 <input type="hidden" name="LeverancierId" value="<?= $data['dataRows'][0]->LeverancierId ?>">
 
                 <label for="Aantal">Aantal producteenheden</label>
-                <input type="number" name="Aantal" id="Aantal" required>
+                <input type="number" name="Aantal" id="Aantal" value="<?= isset($data['Aantal']) ? htmlspecialchars($data['Aantal'], ENT_QUOTES, 'UTF-8') : '' ?>" required>
 
                 <label for="DatumEerstVolgendeLevering">Datum eerstvolgende levering</label>
                 <input type="date" name="DatumEerstVolgendeLevering" id="DatumEerstVolgendeLevering">
