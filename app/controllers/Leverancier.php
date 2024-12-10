@@ -56,10 +56,14 @@ class Leverancier extends BaseController
             $data['dataRows'] = NULL;
 
             header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else if ($result[0]->AantalAanwezig == 0) {
+            $data['message'] = "Dit bedrijf heeft tot nu toe geen producten geleverd aan Jamin.";
+            $data['dataRows'] = $result;
+            header('Refresh:3; url=' . URLROOT . '/Leverancier/index');
         } else {
             $data['dataRows'] = $result;
         }
 
-        $this->view('leverancier/producten', $data);
+        $this->view('leverancier/producten', $data, $result);
     }
 }
