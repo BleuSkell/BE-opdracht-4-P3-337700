@@ -46,4 +46,42 @@ class LeverancierModel
             logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());            
         }
     }
+
+    public function getAllProductDetailsById($ProductId)
+    {
+        try {
+            $sql = "CALL spGetProductDetailsById($ProductId)";
+
+            $this->db->query($sql);
+
+            return $this->db->resultSet();
+
+        } catch (Exception $e) {
+            /**
+             * Log de error in de functie logger()
+             */
+            logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());            
+        }
+    }
+
+    public function nieuweLevering($leverancierId, $productId, $aantal, $datumEerstVolgendeLevering = null)
+    {
+        try {
+            $sql = "CALL spInsertNewLevering(:leverancierId, :productId, :aantal, :datumEerstVolgendeLevering)";
+            $this->db->query($sql);
+
+            // Bind de parameters
+            $this->db->bind(':leverancierId', $leverancierId, PDO::PARAM_INT);
+            $this->db->bind(':productId', $productId, PDO::PARAM_INT);
+            $this->db->bind(':aantal', $aantal, PDO::PARAM_INT);
+            $this->db->bind(':datumEerstVolgendeLevering', $datumEerstVolgendeLevering, PDO::PARAM_STR);
+
+            // Voer de query uit
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());
+            return false;
+        }
+    }
 }
