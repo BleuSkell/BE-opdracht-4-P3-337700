@@ -97,6 +97,7 @@ class Leverancier extends BaseController
             'message' => null,
             'messageColor' => null,
             'messageVisibility' => 'none',
+            'Aantal' => NULL,
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -105,6 +106,22 @@ class Leverancier extends BaseController
             $leverancierId = $_POST['LeverancierId'];
             $aantal = $_POST['Aantal'];
             $datumEerstVolgendeLevering = !empty($_POST['DatumEerstVolgendeLevering']) ? $_POST['DatumEerstVolgendeLevering'] : null;
+            
+            $data['Aantal'] = $aantal;
+
+            if ($datumEerstVolgendeLevering && strtotime($datumEerstVolgendeLevering) < strtotime(date('Y-m-d'))) {
+                $result = $this->leverancierModel->getAllProductDetailsById($productId);
+                if (!is_null($result)) {
+                    $data['dataRows'] = $result;
+                }
+
+                $data['message'] = "De geselecteerde datum mag niet in het verleden liggen.";
+                $data['messageColor'] = "danger";
+                $data['messageVisibility'] = "flex";
+
+                $this->view('leverancier/levering', $data);
+                exit;
+            }
 
             // Voeg nieuwe levering toe
             $result = $this->leverancierModel->nieuweLevering($leverancierId, $productId, $aantal, $datumEerstVolgendeLevering);
