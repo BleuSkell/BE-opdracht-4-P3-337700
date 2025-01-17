@@ -24,15 +24,52 @@
         <div class="col-2"></div>
         <div class="col-8">
             
-            <div class="container d-flex flex-column">
-                <div class="d-flex flex-row">
+            <div class="container d-flex flex-column border border-3 border-black">
+                <div class="d-flex flex-row justify-content-between">
                     <h5>Naam</h5>
-                    <h5></h5>
+                    <h5><?= $data['dataRows']->Naam; ?></h5>
+                </div>
+                
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Contact persoon</h5>
+                    <h5><?= $data['dataRows']->ContactPersoon; ?></h5>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Leverancier nummer</h5>
+                    <h5><?= $data['dataRows']->LeverancierNummer; ?></h5>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Mobiel</h5>
+                    <h5><?= $data['dataRows']->Mobiel; ?></h5>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Straatnaam</h5>
+                    <h5><?= $data['dataRows']->Straatnaam; ?></h5>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Huisnummer</h5>
+                    <h5><?= $data['dataRows']->Huisnummer; ?></h5>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Postcode</h5>
+                    <h5><?= $data['dataRows']->Postcode; ?></h5>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h5>Stad</h5>
+                    <h5><?= $data['dataRows']->Stad; ?></h5>
                 </div>
             </div>
 
+            <a href=""><button>Wijzig</button></a>
+
             <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
-            <a href="<?= URLROOT; ?>/leverancier/index">Leveranciers</a>
+            <a href="<?= URLROOT; ?>/leverancier/edit">Leverancier Overzicht</a>
         </div>
         <div class="col-2"></div>
     </div>

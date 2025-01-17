@@ -197,10 +197,8 @@ class Leverancier extends BaseController
 
             header('Refresh:3; url=' . URLROOT . '/Homepages/index');
         } else {
-            $data['dataRows'] = $result;
+            $data['dataRows'] = $result[0];
         }
-
-        var_dump($data['dataRows']);
 
         $this->view('leverancier/leverancierDetails', $data);
     }
