@@ -190,6 +190,42 @@ VALUES
 
 
 
+CREATE TABLE Contact (
+  Id INT UNSIGNED NOT NULL AUTO_INCREMENT
+  ,Straat VARCHAR(70) NOT NULL
+  ,Huisnummer SMALLINT NOT NULL
+  ,Postcode VARCHAR(40) NOT NULL
+  ,Stad VARCHAR(70) NOT NULL
+  ,IsActief BIT NOT NULL DEFAULT 1
+  ,Opmerking VARCHAR(250) NULL DEFAULT NULL
+  ,DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+  ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
+
+  ,PRIMARY KEY(Id)
+);
+
+INSERT INTO Contact (
+  Straat
+  ,Huisnummer
+  ,Postcode
+  ,Stad
+  ,IsActief
+  ,Opmerking
+  ,DatumAangemaakt
+  ,DatumGewijzigd
+);
+
+VALUES
+('Van Gilslaan', 34, '1045CB', 'Hilvarenbeek', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Den Dolderpad', 2, '1067RC', 'Utrecht', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Fredo Raalteweg', 257, '1236OP', 'Nijmegen', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Bertrand Russellhof', 21, '2034AP', 'Den Haag', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Leon van Bonstraat', 213, '145XC', 'Lunteren', 1, NULL, SYSDATE(6), SYSDATE(6)),
+('Bea van Lingenlaan', 234, '2197FG', 'Sint Pancras', 1, NULL, SYSDATE(6), SYSDATE(6));
+
+
+
+
 CREATE TABLE ProductPerLeverancier (
   Id INT UNSIGNED NOT NULL AUTO_INCREMENT
   ,LeverancierId INT UNSIGNED NOT NULL

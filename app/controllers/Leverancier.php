@@ -149,4 +149,34 @@ class Leverancier extends BaseController
             exit;
         }
     }
+
+    public function edit() {
+        $data = [
+            'title' => 'Overzicht Leveranciers',
+            'message' => NULL,
+            'messageColor' => NULL,
+            'messageVisibility' => 'none',
+            'dataRows' => NULL
+        ];
+
+        $result = $this->leverancierModel->getAllLeveranciers();
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result;
+        }
+
+        $this->view('leverancier/edit', $data);    
+    }
+
+    public function update($leverancierId) {
+        $this->view('leverancier/update');
+    }
 }
