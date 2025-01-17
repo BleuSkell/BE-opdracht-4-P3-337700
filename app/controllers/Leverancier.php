@@ -176,7 +176,8 @@ class Leverancier extends BaseController
         $this->view('leverancier/edit', $data);    
     }
 
-    public function leverancierDetails($leverancierId) {
+    public function leverancierDetails($leverancierId) 
+    {
         $data = [
             'title' => 'Leverancier Details',
             'message' => NULL,
@@ -184,6 +185,22 @@ class Leverancier extends BaseController
             'messageVisibility' => 'none',
             'dataRows' => NULL
         ];
+
+        $result = $this->leverancierModel->getLeverancierById($leverancierId);
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result;
+        }
+
+        var_dump($data['dataRows']);
 
         $this->view('leverancier/leverancierDetails', $data);
     }

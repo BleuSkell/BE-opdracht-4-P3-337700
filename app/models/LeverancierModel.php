@@ -84,4 +84,21 @@ class LeverancierModel
             return false;
         }
     }
+
+    public function getLeverancierById ($leverancierId)
+    {
+        try {
+            $sql = "CALL spGetLeverancierById($leverancierId)";
+
+            $this->db->query($sql);
+
+            return $this->db->resultSet();
+
+        } catch (Exception $e) {
+            /**
+             * Log de error in de functie logger()
+             */
+            logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());            
+        }
+    }
 }

@@ -35,7 +35,9 @@ BEGIN
     FROM        Leverancier AS LEV
 
     INNER JOIN Contact AS CONT
-        ON LEV.ContactId = CONT.Id;
+        ON LEV.ContactId = CONT.Id
+        
+    WHERE LEV.Id = LeverancierId;
 
 END //
 DELIMITER ;

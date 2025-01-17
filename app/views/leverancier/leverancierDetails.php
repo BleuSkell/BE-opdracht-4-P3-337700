@@ -24,6 +24,13 @@
         <div class="col-2"></div>
         <div class="col-8">
             
+            <div class="container d-flex flex-column">
+                <div class="d-flex flex-row">
+                    <h5>Naam</h5>
+                    <h5></h5>
+                </div>
+            </div>
+
             <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
             <a href="<?= URLROOT; ?>/leverancier/index">Leveranciers</a>
         </div>
