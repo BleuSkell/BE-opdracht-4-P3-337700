@@ -213,7 +213,7 @@ INSERT INTO Contact (
   ,Opmerking
   ,DatumAangemaakt
   ,DatumGewijzigd
-);
+)
 
 VALUES
 ('Van Gilslaan', 34, '1045CB', 'Hilvarenbeek', 1, NULL, SYSDATE(6), SYSDATE(6)),
