@@ -49,7 +49,7 @@
                                 <td><?= $leverancier->LeverancierNummer ?></td>
                                 <td><?= $leverancier->Mobiel ?></td>
                                 <td class='text-center'>
-                                    <a href='<?= URLROOT . "/Leverancier/update/$leverancier->LeverancierId" ?>'>
+                                    <a href='<?= URLROOT . "/Leverancier/leverancierDetails/$leverancier->LeverancierId" ?>'>
                                         <i class='bi bi-pencil'></i>
                                     </a>
                                 </td>            

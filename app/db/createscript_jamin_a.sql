@@ -13,7 +13,7 @@ CREATE TABLE Product (
   ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
     
   ,PRIMARY KEY(Id)
-);
+)ENGINE=InnoDB;
 
 INSERT INTO Product
 (
@@ -53,8 +53,8 @@ CREATE TABLE Magazijn (
   ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
     
   ,PRIMARY KEY(Id)
-  ,CONSTRAINT ProductId FOREIGN KEY (ProductId) REFERENCES Product(Id)
-);
+  ,CONSTRAINT FK_Magazijn_Product FOREIGN KEY (ProductId) REFERENCES Product(Id)
+)ENGINE=InnoDB;
 
 INSERT INTO Magazijn
 (
@@ -94,7 +94,7 @@ CREATE TABLE Allergeen (
   ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
     
   ,PRIMARY KEY(Id)
-);
+)ENGINE=InnoDB;
 
 INSERT INTO Allergeen
 (
@@ -125,9 +125,9 @@ CREATE TABLE ProductPerAllergeen (
   ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
     
   ,PRIMARY KEY(Id)
-  ,CONSTRAINT ProductId FOREIGN KEY (ProductId) REFERENCES Product(Id)
-  ,CONSTRAINT AllergeenId FOREIGN KEY (AllergeenId) REFERENCES Allergeen(Id)
-);
+  ,CONSTRAINT FK_ProductPerAllergeen_Product FOREIGN KEY (ProductId) REFERENCES Product(Id)
+  ,CONSTRAINT FK_ProductPerAllergeen_Allergeen FOREIGN KEY (AllergeenId) REFERENCES Allergeen(Id)
+)ENGINE=InnoDB;
 
 INSERT INTO ProductPerAllergeen
 (
@@ -154,42 +154,6 @@ VALUES
 
 
 
-CREATE TABLE Leverancier (
-  Id INT UNSIGNED NOT NULL AUTO_INCREMENT
-  ,Naam VARCHAR(100) NOT NULL
-  ,ContactPersoon VARCHAR(100) NOT NULL
-  ,LeverancierNummer VARCHAR(100) NOT NULL
-  ,Mobiel VARCHAR(100) NOT NULL
-  ,IsActief BIT NOT NULL DEFAULT 1
-  ,Opmerking VARCHAR(250) NULL DEFAULT NULL
-  ,DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
-  ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
-    
-  ,PRIMARY KEY(Id)
-);
-
-INSERT INTO Leverancier
-(
-   Naam
-  ,ContactPersoon
-  ,LeverancierNummer
-  ,Mobiel
-  ,IsActief
-  ,Opmerking
-  ,DatumAangemaakt
-  ,DatumGewijzigd
-)
-
-VALUES
-('Venco', 'Bert van Linge', 'L1029384719', '06-28493827', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('Astra Sweets', 'Jasper del Monte', 'L1029284315', '06-39398734', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('Haribo', 'Sven Stalman', 'L1029324748', '06-24383291', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('Basset', 'Joyce Stelterberg', 'L1023845773', '06-48293823', 1, NULL, SYSDATE(6), SYSDATE(6)),
-('De Bron', 'Remco Veenstra', 'L1023857736', '06-34291234', 1, NULL, SYSDATE(6), SYSDATE(6));
-
-
-
-
 CREATE TABLE Contact (
   Id INT UNSIGNED NOT NULL AUTO_INCREMENT
   ,Straat VARCHAR(70) NOT NULL
@@ -202,7 +166,7 @@ CREATE TABLE Contact (
   ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
 
   ,PRIMARY KEY(Id)
-);
+)ENGINE=InnoDB;
 
 INSERT INTO Contact (
   Straat
@@ -225,6 +189,44 @@ VALUES
 
 
 
+CREATE TABLE Leverancier (
+  Id INT UNSIGNED NOT NULL AUTO_INCREMENT
+  ,ContactId INT UNSIGNED NOT NULL
+  ,Naam VARCHAR(100) NOT NULL
+  ,ContactPersoon VARCHAR(100) NOT NULL
+  ,LeverancierNummer VARCHAR(100) NOT NULL
+  ,Mobiel VARCHAR(100) NOT NULL
+  ,IsActief BIT NOT NULL DEFAULT 1
+  ,Opmerking VARCHAR(250) NULL DEFAULT NULL
+  ,DatumAangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+  ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
+    
+  ,PRIMARY KEY(Id)
+  ,CONSTRAINT FK_Leverancier_Contact FOREIGN KEY (ContactId) REFERENCES Contact(Id)
+)ENGINE=InnoDB;
+
+INSERT INTO Leverancier
+( 
+  ContactId
+  ,Naam
+  ,ContactPersoon
+  ,LeverancierNummer
+  ,Mobiel
+  ,IsActief
+  ,Opmerking
+  ,DatumAangemaakt
+  ,DatumGewijzigd
+)
+
+VALUES
+(1, 'Venco', 'Bert van Linge', 'L1029384719', '06-28493827', 1, NULL, SYSDATE(6), SYSDATE(6)),
+(2, 'Astra Sweets', 'Jasper del Monte', 'L1029284315', '06-39398734', 1, NULL, SYSDATE(6), SYSDATE(6)),
+(3, 'Haribo', 'Sven Stalman', 'L1029324748', '06-24383291', 1, NULL, SYSDATE(6), SYSDATE(6)),
+(4, 'Basset', 'Joyce Stelterberg', 'L1023845773', '06-48293823', 1, NULL, SYSDATE(6), SYSDATE(6)),
+(5, 'De Bron', 'Remco Veenstra', 'L1023857736', '06-34291234', 1, NULL, SYSDATE(6), SYSDATE(6)),
+(6, 'Quality Street', 'Johan Nooij', 'L1029234586', '06-23458456', 1, NULL, SYSDATE(6), SYSDATE(6));
+
+
 
 CREATE TABLE ProductPerLeverancier (
   Id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -240,10 +242,10 @@ CREATE TABLE ProductPerLeverancier (
   ,DatumGewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6) ON UPDATE NOW(6)
 
   ,PRIMARY KEY(Id)
-  ,CONSTRAINT LeverancierId FOREIGN KEY (LeverancierId) REFERENCES Leverancier(Id)
-  ,CONSTRAINT ProductId FOREIGN KEY (ProductId) REFERENCES Product(Id)
-  ,CONSTRAINT MagazijnId FOREIGN KEY (MagazijnId) REFERENCES Magazijn(Id)
-);
+  ,CONSTRAINT FK_Leverancier_ProductPerLeverancier FOREIGN KEY (LeverancierId) REFERENCES Leverancier(Id)
+  ,CONSTRAINT FK_Product_ProductPerLeverancier FOREIGN KEY (ProductId) REFERENCES Product(Id)
+  ,CONSTRAINT FK_Magazijn_ProductPerLeverancier FOREIGN KEY (MagazijnId) REFERENCES Magazijn(Id)
+)ENGINE=InnoDB;
 
 INSERT INTO ProductPerLeverancier
 (

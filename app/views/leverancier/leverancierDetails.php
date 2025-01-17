@@ -23,9 +23,7 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <form action="">
-                
-            </form>
+            
             <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
             <a href="<?= URLROOT; ?>/leverancier/index">Leveranciers</a>
         </div>

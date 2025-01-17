@@ -176,15 +176,15 @@ class Leverancier extends BaseController
         $this->view('leverancier/edit', $data);    
     }
 
-    public function update($leverancierId) {
+    public function leverancierDetails($leverancierId) {
         $data = [
-            'title' => 'Wijzig Leverancier Gegevens',
+            'title' => 'Leverancier Details',
             'message' => NULL,
             'messageColor' => NULL,
             'messageVisibility' => 'none',
             'dataRows' => NULL
         ];
 
-        $this->view('leverancier/update', $data);
+        $this->view('leverancier/leverancierDetails', $data);
     }
 }

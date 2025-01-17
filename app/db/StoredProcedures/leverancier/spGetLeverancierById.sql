@@ -22,25 +22,20 @@ CREATE PROCEDURE spGetLeverancierById(
 BEGIN
 
     SELECT      LEV.Id                   AS LeverancierId
+                ,LEV.ContactId
                 ,LEV.Naam
                 ,LEV.ContactPersoon
                 ,LEV.LeverancierNummer
                 ,LEV.Mobiel
-                ,PROD.Id                 AS ProductId
-                ,COUNT(DISTINCT PROD.Id) AS AantalVerschillendeProducten
+                ,CONT.Straat             AS Straatnaam
+                ,CONT.Huisnummer
+                ,CONT.Postcode
+                ,CONT.Stad
 
     FROM        Leverancier AS LEV
 
-    LEFT JOIN ProductPerLeverancier AS PPL
-            ON LEV.Id = PPL.LeverancierId
-            
-    LEFT JOIN Product AS PROD
-            ON PROD.Id = PPL.ProductId
-
-    GROUP BY  LEV.Id
-            
-    ORDER BY AantalVerschillendeProducten DESC;
-
+    INNER JOIN Contact AS CONT
+        ON LEV.ContactId = CONT.Id;
 
 END //
 DELIMITER ;
