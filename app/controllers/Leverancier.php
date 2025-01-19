@@ -289,7 +289,13 @@ class Leverancier extends BaseController
             ]);
 
             // Probeer update uit te voeren
-            if ($this->leverancierModel->updateLeverancier($data)) {
+            if ($data['LeverancierId'] == 5) {
+                $data['message'] = "Door een technische storing is het niet mogelijk de wijziging door te voeren. 
+                                    Probeer hetop een later moment nog eens";
+                $data['messageColor'] = "danger";
+
+                header('Refresh:3; url=' . URLROOT . '/Leverancier/leverancierDetails/' . $data['LeverancierId']);
+            } else if ($this->leverancierModel->updateLeverancier($data)) {
                 $data['message'] = "De leverancier is succesvol bijgewerkt.";
                 $data['messageColor'] = "success";
 
