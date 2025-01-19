@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <a href=""><button>Wijzig</button></a>
+            <a href='<?= URLROOT . "/Leverancier/editLeverancier/" . $data['dataRows']->LeverancierId ?>'><button>Wijzig</button></a>
 
             <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
             <a href="<?= URLROOT; ?>/leverancier/edit">Leverancier Overzicht</a>

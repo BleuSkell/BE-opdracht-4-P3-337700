@@ -202,4 +202,55 @@ class Leverancier extends BaseController
 
         $this->view('leverancier/leverancierDetails', $data);
     }
+
+    public function editLeverancier($leverancierId)
+    {
+        $data = [
+            'title' => 'Wijzig Leveranciergegevens',
+            'message' => NULL,
+            'messageColor' => NULL,
+            'messageVisibility' => 'none',
+            'dataRows' => NULL
+        ];
+
+        $result = $this->leverancierModel->getLeverancierById($leverancierId);
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result[0];
+        }
+
+        $this->view('leverancier/editLeverancier', $data);
+    }
+
+    public function updateLeverancier()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'LeverancierId' => $_POST['LeverancierId'],
+                'Naam' => trim($_POST['Naam']),
+                'ContactPersoon' => trim($_POST['ContactPersoon']),
+                'LeverancierNummer' => trim($_POST['LeverancierNummer']),
+                'Mobiel' => trim($_POST['Mobiel']),
+                'Straatnaam' => trim($_POST['Straatnaam']),
+                'Huisnummer' => trim($_POST['Huisnummer']),
+                'Postcode' => trim($_POST['Postcode']),
+                'Stad' => trim($_POST['Stad'])
+            ];
+        
+            // Controleer of het model wordt aangeroepen
+            if ($this->leverancierModel->updateLeverancier($data)) {
+                header('Refresh:3; url=' . URLROOT . '/Leverancier/edit');
+            } else {
+                echo 'Update mislukt!';
+            }
+        }        
+    }
 }
