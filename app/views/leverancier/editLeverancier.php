@@ -24,7 +24,7 @@
         <div class="col-2"></div>
         <div class="col-8">
 
-            <form action="<?= URLROOT; ?>/leverancier/updateLeverancier" method="POST">
+            <form action="<?= URLROOT; ?>/leverancier/editLeverancier" method="POST">
                 <input type="hidden" name="LeverancierId" value="<?= $data['dataRows']->LeverancierId; ?>">
 
                 <div class="container d-flex flex-column border border-3 border-black">
