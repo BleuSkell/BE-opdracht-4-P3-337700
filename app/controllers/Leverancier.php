@@ -203,8 +203,69 @@ class Leverancier extends BaseController
         $this->view('leverancier/leverancierDetails', $data);
     }
 
+    // public function editLeverancier($leverancierId = null)
+    // {
+    //     $data = [
+    //         'title' => 'Wijzig Leveranciergegevens',
+    //         'message' => null,
+    //         'messageColor' => null,
+    //         'messageVisibility' => 'none',
+    //         'dataRows' => null
+    //     ];
+
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         // Verwerk het formulier
+    //         $data = [
+    //             'LeverancierId' => $_POST['LeverancierId'],
+    //             'Naam' => trim($_POST['Naam']),
+    //             'ContactPersoon' => trim($_POST['ContactPersoon']),
+    //             'LeverancierNummer' => trim($_POST['LeverancierNummer']),
+    //             'Mobiel' => trim($_POST['Mobiel']),
+    //             'Straatnaam' => trim($_POST['Straatnaam']),
+    //             'Huisnummer' => trim($_POST['Huisnummer']),
+    //             'Postcode' => trim($_POST['Postcode']),
+    //             'Stad' => trim($_POST['Stad'])
+    //         ];
+
+    //         // Probeer de update uit te voeren
+    //         if ($this->leverancierModel->updateLeverancier($data)) {
+    //             $data['message'] = "De leverancier is succesvol bijgewerkt.";
+    //             $data['messageColor'] = "success";
+
+    //             // header('Refresh:3; url=' . URLROOT . '/Leverancier/leverancierDetails/' . $data['LeverancierId']);
+    //         } else {
+    //             $data['message'] = "Er is een fout opgetreden bij het bijwerken van de leverancier.";
+    //             $data['messageColor'] = "danger";
+    //         }
+
+    //         $data['messageVisibility'] = "flex";
+
+    //     } else {
+    //         // Laad de gegevens van de leverancier om te bewerken
+    //         if ($leverancierId) {
+    //             $result = $this->leverancierModel->getLeverancierById($leverancierId);
+
+    //             if (is_null($result)) {
+    //                 $data['message'] = "Er is een fout opgetreden bij het ophalen van de gegevens.";
+    //                 $data['messageColor'] = "danger";
+    //                 $data['messageVisibility'] = "flex";
+    //             } else {
+    //                 $data['dataRows'] = $result[0];
+    //             }
+    //         } else {
+    //             // Geen leverancierId opgegeven
+    //             header('Location: ' . URLROOT . '/leverancier/index');
+    //             exit;
+    //         }
+    //     }
+
+    //     // Toon de view
+    //     $this->view('leverancier/editLeverancier', $data);
+    // }
+
     public function editLeverancier($leverancierId = null)
     {
+        // Standaard data-array
         $data = [
             'title' => 'Wijzig Leveranciergegevens',
             'message' => null,
@@ -214,8 +275,8 @@ class Leverancier extends BaseController
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Verwerk het formulier
-            $data = [
+            // Formulierdata verwerken
+            $data = array_merge($data, [
                 'LeverancierId' => $_POST['LeverancierId'],
                 'Naam' => trim($_POST['Naam']),
                 'ContactPersoon' => trim($_POST['ContactPersoon']),
@@ -224,10 +285,10 @@ class Leverancier extends BaseController
                 'Straatnaam' => trim($_POST['Straatnaam']),
                 'Huisnummer' => trim($_POST['Huisnummer']),
                 'Postcode' => trim($_POST['Postcode']),
-                'Stad' => trim($_POST['Stad'])
-            ];
+                'Stad' => trim($_POST['Stad']),
+            ]);
 
-            // Probeer de update uit te voeren
+            // Probeer update uit te voeren
             if ($this->leverancierModel->updateLeverancier($data)) {
                 $data['message'] = "De leverancier is succesvol bijgewerkt.";
                 $data['messageColor'] = "success";
@@ -239,27 +300,25 @@ class Leverancier extends BaseController
             }
 
             $data['messageVisibility'] = "flex";
-
         } else {
-            // Laad de gegevens van de leverancier om te bewerken
+            // Ophalen gegevens voor GET-request
             if ($leverancierId) {
                 $result = $this->leverancierModel->getLeverancierById($leverancierId);
 
-                if (is_null($result)) {
+                if ($result) {
+                    $data['dataRows'] = $result[0];
+                } else {
                     $data['message'] = "Er is een fout opgetreden bij het ophalen van de gegevens.";
                     $data['messageColor'] = "danger";
                     $data['messageVisibility'] = "flex";
-                } else {
-                    $data['dataRows'] = $result[0];
                 }
             } else {
-                // Geen leverancierId opgegeven
                 header('Location: ' . URLROOT . '/leverancier/index');
                 exit;
             }
         }
 
-        // Toon de view
+        // Toon de view met de bijgewerkte data
         $this->view('leverancier/editLeverancier', $data);
     }
 }
