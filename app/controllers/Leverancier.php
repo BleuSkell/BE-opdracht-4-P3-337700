@@ -150,30 +150,36 @@ class Leverancier extends BaseController
         }
     }
 
-    public function edit() {
+    public function edit($page = 1)
+    {
+        $limit = 4; // Aantal records per pagina
+        $offset = ($page - 1) * $limit;
+
         $data = [
             'title' => 'Overzicht Leveranciers',
             'message' => NULL,
             'messageColor' => NULL,
             'messageVisibility' => 'none',
-            'dataRows' => NULL
+            'dataRows' => NULL,
+            'currentPage' => $page,
+            'totalPages' => 1 // Defaultwaarde, deze updaten we later
         ];
 
-        $result = $this->leverancierModel->getAllLeveranciers();
+        // Haal het totaal aantal records op
+        $totalLeveranciers = $this->leverancierModel->getTotalLeveranciers();
+        $data['totalPages'] = ceil($totalLeveranciers / $limit);
+
+        $result = $this->leverancierModel->getAllLeveranciers($limit, $offset);
 
         if (is_null($result)) {
-            // Fout afhandelen
             $data['message'] = "Er is een fout opgetreden in de database";
             $data['messageColor'] = "danger";
             $data['messageVisibility'] = "flex";
-            $data['dataRows'] = NULL;
-
-            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
         } else {
             $data['dataRows'] = $result;
         }
 
-        $this->view('leverancier/edit', $data);    
+        $this->view('leverancier/edit', $data);
     }
 
     public function leverancierDetails($leverancierId) 
@@ -202,66 +208,6 @@ class Leverancier extends BaseController
 
         $this->view('leverancier/leverancierDetails', $data);
     }
-
-    // public function editLeverancier($leverancierId = null)
-    // {
-    //     $data = [
-    //         'title' => 'Wijzig Leveranciergegevens',
-    //         'message' => null,
-    //         'messageColor' => null,
-    //         'messageVisibility' => 'none',
-    //         'dataRows' => null
-    //     ];
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         // Verwerk het formulier
-    //         $data = [
-    //             'LeverancierId' => $_POST['LeverancierId'],
-    //             'Naam' => trim($_POST['Naam']),
-    //             'ContactPersoon' => trim($_POST['ContactPersoon']),
-    //             'LeverancierNummer' => trim($_POST['LeverancierNummer']),
-    //             'Mobiel' => trim($_POST['Mobiel']),
-    //             'Straatnaam' => trim($_POST['Straatnaam']),
-    //             'Huisnummer' => trim($_POST['Huisnummer']),
-    //             'Postcode' => trim($_POST['Postcode']),
-    //             'Stad' => trim($_POST['Stad'])
-    //         ];
-
-    //         // Probeer de update uit te voeren
-    //         if ($this->leverancierModel->updateLeverancier($data)) {
-    //             $data['message'] = "De leverancier is succesvol bijgewerkt.";
-    //             $data['messageColor'] = "success";
-
-    //             // header('Refresh:3; url=' . URLROOT . '/Leverancier/leverancierDetails/' . $data['LeverancierId']);
-    //         } else {
-    //             $data['message'] = "Er is een fout opgetreden bij het bijwerken van de leverancier.";
-    //             $data['messageColor'] = "danger";
-    //         }
-
-    //         $data['messageVisibility'] = "flex";
-
-    //     } else {
-    //         // Laad de gegevens van de leverancier om te bewerken
-    //         if ($leverancierId) {
-    //             $result = $this->leverancierModel->getLeverancierById($leverancierId);
-
-    //             if (is_null($result)) {
-    //                 $data['message'] = "Er is een fout opgetreden bij het ophalen van de gegevens.";
-    //                 $data['messageColor'] = "danger";
-    //                 $data['messageVisibility'] = "flex";
-    //             } else {
-    //                 $data['dataRows'] = $result[0];
-    //             }
-    //         } else {
-    //             // Geen leverancierId opgegeven
-    //             header('Location: ' . URLROOT . '/leverancier/index');
-    //             exit;
-    //         }
-    //     }
-
-    //     // Toon de view
-    //     $this->view('leverancier/editLeverancier', $data);
-    // }
 
     public function editLeverancier($leverancierId = null)
     {

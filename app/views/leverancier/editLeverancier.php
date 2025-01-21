@@ -67,11 +67,15 @@
                     </div>
                 </div>
 
-                <button type="submit">Sla op</button>
-            </form>
+                <div class="d-flex flex-row justify-content-between mt-3">
+                    <button type="submit">Sla op</button>
 
-            <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
-            <a href="<?= URLROOT; ?>/leverancier/edit">Leverancier Overzicht</a>
+                    <div>
+                        <a href="<?= URLROOT; ?>/leverancier/edit"><button type="button">Terug</button></a>
+                        <a href="<?= URLROOT; ?>/homepages/index"><button type="button">home</button></a>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-2"></div>
     </div>

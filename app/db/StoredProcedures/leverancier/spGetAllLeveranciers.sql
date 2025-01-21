@@ -16,7 +16,10 @@ DROP PROCEDURE IF EXISTS spGetAllLeveranciers;
 
 DELIMITER //
 
-CREATE PROCEDURE spGetAllLeveranciers()
+CREATE PROCEDURE spGetAllLeveranciers(
+    IN limitValue INT,
+    IN offsetValue INT
+)
 BEGIN
 
     SELECT      LEV.Id                   AS LeverancierId
@@ -36,9 +39,8 @@ BEGIN
             ON PROD.Id = PPL.ProductId
 
     GROUP BY  LEV.Id
-            
-    ORDER BY AantalVerschillendeProducten DESC;
-
+    ORDER BY AantalVerschillendeProducten DESC
+    LIMIT limitValue OFFSET offsetValue;
 
 END //
 DELIMITER ;

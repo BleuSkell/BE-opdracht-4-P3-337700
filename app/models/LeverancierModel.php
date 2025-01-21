@@ -13,20 +13,30 @@ class LeverancierModel
         $this->db = new Database();
     }   
 
-    public function getAllLeveranciers()
+    public function getAllLeveranciers($limit, $offset)
     {
         try {
-            $sql = "CALL spGetAllLeveranciers()";
-
+            $sql = "CALL spGetAllLeveranciers(:limitValue, :offsetValue)";
+            
             $this->db->query($sql);
+            $this->db->bind(':limitValue', $limit, PDO::PARAM_INT);
+            $this->db->bind(':offsetValue', $offset, PDO::PARAM_INT);
 
             return $this->db->resultSet();
 
         } catch (Exception $e) {
-            /**
-             * Log de error in de functie logger()
-             */
             logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());            
+        }
+    }
+
+    public function getTotalLeveranciers()
+    {
+        try {
+            $sql = "SELECT COUNT(*) AS total FROM Leverancier";
+            $this->db->query($sql);
+            return $this->db->single()->total;
+        } catch (Exception $e) {
+            logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());
         }
     }
 

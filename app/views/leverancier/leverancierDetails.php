@@ -64,12 +64,15 @@
                     <h5>Stad</h5>
                     <h5><?= $data['dataRows']->Stad; ?></h5>
                 </div>
+            </div> 
+            <div class="d-flex flex-row justify-content-between mt-3">
+                <a href='<?= URLROOT . "/Leverancier/editLeverancier/" . $data['dataRows']->LeverancierId ?>'><button>Wijzig</button></a>
+                
+                <div>
+                    <a href="<?= URLROOT; ?>/leverancier/edit"><button>Terug</button></a>
+                    <a href="<?= URLROOT; ?>/homepages/index"><button>Home</button></a>
+                </div>
             </div>
-
-            <a href='<?= URLROOT . "/Leverancier/editLeverancier/" . $data['dataRows']->LeverancierId ?>'><button>Wijzig</button></a>
-
-            <a href="<?= URLROOT; ?>/homepages/index">Homepage</a> |
-            <a href="<?= URLROOT; ?>/leverancier/edit">Leverancier Overzicht</a>
         </div>
         <div class="col-2"></div>
     </div>

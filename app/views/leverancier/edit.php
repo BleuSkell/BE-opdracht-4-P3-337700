@@ -57,7 +57,21 @@
                     <?php } } ?>
                 </tbody>
             </table>
+
             <a href="<?= URLROOT; ?>/homepages/index">Homepage</a>
+
+            <div class="col-12 text-center">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <?php for ($i = 1; $i <= $data['totalPages']; $i++): ?>
+                            <li class="page-item <?= ($i == $data['currentPage']) ? 'active' : '' ?>">
+                                <a class="page-link" href="<?= URLROOT; ?>/Leverancier/edit/<?= $i; ?>"><?= $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </nav>
+            </div>
+            
         </div>
         <div class="col-2"></div>
     </div>
