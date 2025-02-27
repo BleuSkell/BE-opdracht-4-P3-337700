@@ -23,7 +23,36 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <h1>Hallo van de leverancierDetails pagina</h1>
+            
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Naam Leverancier</th>
+                        <th>Contactpersoon</th>
+                        <th>Mobiel</th>
+                        <th>Stad</th>
+                        <th>Straat</th>
+                        <th>Huisnummer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (is_null($data['dataRows'])) { ?>
+                              <tr>
+                                <td colspan='6' class='text-center'>Door een storing kunnen we op dit moment geen producten tonen uit het magazijn</td>
+                              </tr>
+                    <?php } else { ?>
+                                <tr>
+                                    <td><?= $data['dataRows']->Naam ?></td>
+                                    <td><?= $data['dataRows']->ContactPersoon ?></td>
+                                    <td><?= $data['dataRows']->Mobiel ?></td>
+                                    <td><?= $data['dataRows']->Stad ?></td>
+                                    <td><?= $data['dataRows']->Straatnaam ?></td>
+                                    <td><?= $data['dataRows']->Huisnummer ?></td>
+                                </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <a href="<?= URLROOT; ?>/homepages/index">Homepage</a>
         </div>
         <div class="col-2"></div>
     </div>
