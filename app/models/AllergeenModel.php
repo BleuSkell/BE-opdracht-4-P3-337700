@@ -13,12 +13,13 @@ class AllergeenModel
         $this->db = new Database();
     }   
 
-    public function getAllAllergenen()
+    public function getAllAllergenenWithFilter($allergeen)
     {
         try {
-            $sql = "CALL spGetAllAllergenenWithProducts()";
+            $sql = "CALL spGetAllAllergenenWithProducts(:allergeenFilter)";
             
             $this->db->query($sql);
+            $this->db->bind(':allergeenFilter', $allergeen, PDO::PARAM_STR);
 
             return $this->db->resultSet();
 

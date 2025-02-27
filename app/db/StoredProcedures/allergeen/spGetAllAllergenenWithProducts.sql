@@ -2,7 +2,7 @@
 -- Doel: oproepen van alle allergenen met de 
          bijbehorende producten en magazijn gegevens
 *******************************************************
--- Versie:  03
+-- Versie:  04
 -- Datum:   27-02-2025
 -- Auteur:  Kyano Sowirono
 ******************************************************/
@@ -16,7 +16,9 @@ DROP PROCEDURE IF EXISTS spGetAllAllergenenWithProducts;
 -- Verander even tijdelijk de opdrachtprompt naar //
 DELIMITER //
 
-CREATE PROCEDURE spGetAllAllergenenWithProducts()
+CREATE PROCEDURE spGetAllAllergenenWithProducts(
+    IN allergeenFilter VARCHAR(255)
+)
 BEGIN
     SELECT  
             PPALLR.Id               AS ProductPerAllergeenId,
@@ -38,6 +40,7 @@ BEGIN
         ON     PPALLR.ProductId = PROD.Id
     INNER JOIN magazijn             AS MAGA
         ON     PROD.Id = MAGA.ProductId
+    WHERE   (allergeenFilter IS NULL OR ALLR.Naam = allergeenFilter)
     ORDER BY PROD.Naam DESC;
 END //
 DELIMITER ;

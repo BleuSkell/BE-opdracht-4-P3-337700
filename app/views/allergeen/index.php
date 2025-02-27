@@ -24,6 +24,23 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
+            <form action="<?= URLROOT; ?>/Allergeen/index" method="GET" class="mb-3">
+                <label for="allergeen">Allergeen:</label>
+                <select name="allergeen" id="allergeen" class="form-control">
+                    <option value="">-- Kies een allergeen --</option>
+                    <option value="Lactose">Lactose</option>
+                    <option value="Gluten">Gluten</option>
+                    <option value="Noten">Noten</option>
+                </select>
+                <button type="submit" class="btn btn-primary mt-2">Maak selectie</button>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-2"></div>
+        <div class="col-8">
             
             <table class="table table-hover">
                 <thead>

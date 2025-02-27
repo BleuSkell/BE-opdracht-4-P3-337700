@@ -10,7 +10,9 @@ class Allergeen extends BaseController
     }
 
     public function index()
-    {
+    {   
+        $allergeen = $_GET['allergeen'] ?? '';
+
         $data = [
             'title' => 'Overzicht Allergenen',
             'message' => NULL,
@@ -19,7 +21,7 @@ class Allergeen extends BaseController
             'dataRows' => NULL
         ];
 
-        $result = $this->allergeenModel->getAllAllergenen();
+        $result = $this->allergeenModel->getAllAllergenenWithFilter($allergeen);
 
         if (is_null($result)) {
             // Fout afhandelen
