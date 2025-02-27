@@ -2,7 +2,7 @@
 -- Doel: oproepen van alle allergenen met de 
          bijbehorende producten en magazijn gegevens
 *******************************************************
--- Versie:  04
+-- Versie:  05
 -- Datum:   27-02-2025
 -- Auteur:  Kyano Sowirono
 ******************************************************/
@@ -32,7 +32,9 @@ BEGIN
             PROD.Barcode            AS ProductBarcode,
             MAGA.Id                 AS MagazijnId,
             MAGA.ProductId          AS MagazijnProductId,
-            MAGA.AantalAanwezig     AS MagazijnAantalAanwezig
+            MAGA.AantalAanwezig     AS MagazijnAantalAanwezig,
+            PPL.LeverancierId       AS ProductPerLeverancierLeverancierId,
+            LEV.Id                  AS LeverancierId
     FROM    productperallergeen     AS PPALLR
     INNER JOIN allergeen            AS ALLR
         ON     PPALLR.AllergeenId = ALLR.Id
@@ -40,6 +42,10 @@ BEGIN
         ON     PPALLR.ProductId = PROD.Id
     INNER JOIN magazijn             AS MAGA
         ON     PROD.Id = MAGA.ProductId
+    INNER JOIN productperleverancier        AS PPL
+        ON     PROD.Id = PPL.ProductId
+    INNER JOIN leverancier           AS LEV
+        ON     PPL.LeverancierId = LEV.Id
     WHERE   (allergeenFilter IS NULL OR ALLR.Naam = allergeenFilter)
     ORDER BY PROD.Naam DESC;
 END //

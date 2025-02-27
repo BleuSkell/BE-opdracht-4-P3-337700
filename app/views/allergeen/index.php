@@ -65,7 +65,7 @@
                                     <td><?= $allergeenProduct->AllergeenOmschrijving ?></td>
                                     <td><?= $allergeenProduct->MagazijnAantalAanwezig ?></td>
                                     <td class='text-center'>
-                                        <a href='<?= URLROOT . "/" ?>'>
+                                        <a href='<?= URLROOT . "/Allergeen/overview/" . $allergeenProduct->LeverancierId ?>'>
                                             <i class="bi bi-question-lg"></i>
                                         </a>
                                     </td>  

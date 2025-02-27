@@ -37,4 +37,31 @@ class Allergeen extends BaseController
 
         $this->view('allergeen/index', $data);
     }
+
+    public function overview($leverancierId)
+    {
+        $data = [
+            'title' => 'Overzicht Leverancier gegevens',
+            'message' => NULL,
+            'messageColor' => NULL,
+            'messageVisibility' => 'none',
+            'dataRows' => NULL
+        ];
+
+        $result = $this->allergeenModel->getAllergeenProductLeverancierById($leverancierId);
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result[0];
+        }
+
+        $this->view('allergeen/overview', $data);
+    }
 }
