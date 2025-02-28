@@ -38,16 +38,20 @@
                 <tbody>
                     <?php if (is_null($data['dataRows'])) { ?>
                               <tr>
-                                <td colspan='6' class='text-center'>Door een storing kunnen we op dit moment geen producten tonen uit het magazijn</td>
+                                <td colspan='6' class='text-center'>Door een storing kunnen we op dit moment de leverancier niet ophalen</td>
                               </tr>
                     <?php } else { ?>
                                 <tr>
                                     <td><?= $data['dataRows']->Naam ?></td>
                                     <td><?= $data['dataRows']->ContactPersoon ?></td>
                                     <td><?= $data['dataRows']->Mobiel ?></td>
-                                    <td><?= $data['dataRows']->Stad ?></td>
-                                    <td><?= $data['dataRows']->Straatnaam ?></td>
-                                    <td><?= $data['dataRows']->Huisnummer ?></td>
+                                    <?php if ($data['dataRows']->Stad == NULL) { ?>
+                                        <td colspan="3">Er zijn geen adresgegevens bekend</td>
+                                    <?php } else { ?>
+                                        <td><?= $data['dataRows']->Stad ?></td>
+                                        <td><?= $data['dataRows']->Straatnaam ?></td>
+                                        <td><?= $data['dataRows']->Huisnummer ?></td>
+                                    <?php } ?>
                                 </tr>
                     <?php } ?>
                 </tbody>

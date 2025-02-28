@@ -1,7 +1,7 @@
 /************************************************
 -- Doel: Opvragen specifieke record uit de tabel
 ************************************************
--- Versie: 01
+-- Versie: 02
 -- Datum:  17-1-2025
 -- Auteur: Kyano Sowirono
 -- Details: Stored procedure voor allergeen model method
@@ -33,7 +33,7 @@ BEGIN
 
     FROM        Leverancier AS LEV
 
-    INNER JOIN Contact AS CONT
+    LEFT JOIN Contact AS CONT
         ON LEV.ContactId = CONT.Id
         
     WHERE LEV.Id = LeverancierId;
