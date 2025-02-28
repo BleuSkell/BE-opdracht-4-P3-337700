@@ -2,7 +2,7 @@
 -- Doel: oproepen van alle allergenen met de 
          bijbehorende producten en magazijn gegevens
 *******************************************************
--- Versie:  07
+-- Versie:  08
 -- Datum:   27-02-2025
 -- Auteur:  Kyano Sowirono
 ******************************************************/
@@ -47,7 +47,7 @@ BEGIN
     INNER JOIN leverancier           AS LEV
         ON     PPL.LeverancierId = LEV.Id
     WHERE   (allergeenFilter IS NULL OR allergeenFilter = '' OR ALLR.Naam = allergeenFilter)
-    ORDER BY PROD.Naam DESC;
+    ORDER BY PROD.Naam;
 END //
 DELIMITER ;
 
