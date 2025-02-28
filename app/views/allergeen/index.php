@@ -30,7 +30,9 @@
                     <option value="">-- Kies een allergeen --</option>
                     <option value="Lactose">Lactose</option>
                     <option value="Gluten">Gluten</option>
-                    <option value="Noten">Noten</option>
+                    <option value="Soja">Soja</option>
+                    <option value="AZO-kleurstof">AZO-kleurstof</option>
+                    <option value="Gelatine">Gelatine</option>
                 </select>
                 <button type="submit" class="btn btn-primary mt-2">Maak selectie</button>
             </form>
