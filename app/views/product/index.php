@@ -41,31 +41,38 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <!-- Display the filtered data here -->
-            <?php if (!empty($data['dataRows'])): ?>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Leverancier Naam</th>
-                            <th>Contact Persoon</th>
-                            <th>Product Naam</th>
-                            <th>Totaal Geleverd</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Leverancier Naam</th>
+                        <th>Contact Persoon</th>
+                        <th>Product Naam</th>
+                        <th>Totaal Geleverd</th>
+                        <th>Specificatie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($data['dataRows'])) : ?>
                         <?php foreach ($data['dataRows'] as $row): ?>
                             <tr>
                                 <td><?= $row->LeverancierNaam; ?></td>
                                 <td><?= $row->LeverancierContactPersoon; ?></td>
                                 <td><?= $row->ProductNaam; ?></td>
                                 <td><?= $row->TotaalGeleverd; ?></td>
+                                <td class='text-center'>
+                                    <a href='<?= URLROOT . "/Product/specification/" ?>'>
+                                        <i class="bi bi-question-lg"></i>
+                                    </a>
+                                </td>  
                             </tr>
                         <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p>Geen gegevens gevonden voor de opgegeven datumbereik.</p>
-            <?php endif; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="5" class="text-center">Geen gegevens gevonden voor de opgegeven datumbereik.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
         <div class="col-2"></div>
     </div>
