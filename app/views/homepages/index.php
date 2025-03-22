@@ -13,7 +13,8 @@
             <a href="<?= URLROOT; ?>/Magazijn/index">Overzicht Magazijn Jamin</a> |
             <a href="<?= URLROOT; ?>/Leverancier/index">Overzicht Jamin Leveranciers</a> | 
             <a href="<?= URLROOT; ?>/Leverancier/edit">Wijzigen Leveranciers</a> | 
-            <a href="<?= URLROOT; ?>/Allergeen/index">Overzicht Allergenen</a>
+            <a href="<?= URLROOT; ?>/Allergeen/index">Overzicht Allergenen</a> |
+            <a href="<?= URLROOT; ?>/Product/index">Overzicht geleverde producten</a> |
 
         </div>
         
