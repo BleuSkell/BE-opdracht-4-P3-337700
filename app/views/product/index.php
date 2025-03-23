@@ -1,6 +1,6 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
 
-<div class="container">
+<div class="container mt-5">
 
     <div class="row mt-3 text-center" style="display:<?= $data['messageVisibility']; ?>">
         <div class="col-2"></div>
@@ -11,11 +11,27 @@
         </div>
         <div class="col-2"></div>
     </div>
-
+    
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <h3><?php echo $data['title']; ?></h3>
+            <div class="d-flex row align-items-center">
+                <h4 class="col-5 m-0 p-0 h-25 text-center text-decoration-underline"><?php echo $data['title']; ?></h4>
+                
+                <form action="<?= URLROOT; ?>/Product/index" method="GET" class="col-7 p-0">
+                    <div class="d-flex row justify-content-evenly">
+                        <div class="form-group col-4 d-flex row">
+                            <label for="startDate">Start Datum:</label>
+                            <input type="date" class="form-control" id="startDate" name="startDate" value="<?= $data['startDate'] ?>">
+                        </div>
+                        <div class="form-group col-4 d-flex row">
+                            <label for="endDate">Eind Datum:</label>
+                            <input type="date" class="form-control" id="endDate" name="endDate" value="<?= $data['endDate'] ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-4 col-3">Maak selectie</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="col-2"></div>
     </div>
@@ -23,25 +39,7 @@
     <div class="row mt-3">
         <div class="col-2"></div>
         <div class="col-8">
-            <form action="<?= URLROOT; ?>/product/index" method="GET">
-                <div class="form-group">
-                    <label for="startDate">Start Datum:</label>
-                    <input type="date" class="form-control" id="startDate" name="startDate" value="<?= isset($_GET['startDate']) ? $_GET['startDate'] : ''; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="endDate">Eind Datum:</label>
-                    <input type="date" class="form-control" id="endDate" name="endDate" value="<?= isset($_GET['endDate']) ? $_GET['endDate'] : ''; ?>">
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Filter</button>
-            </form>
-        </div>
-        <div class="col-2"></div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <table class="table table-striped">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Leverancier Naam</th>
@@ -60,7 +58,7 @@
                                 <td><?= $row->ProductNaam; ?></td>
                                 <td><?= $row->TotaalGeleverd; ?></td>
                                 <td class='text-center'>
-                                    <a href='<?= URLROOT . "/Product/specification/" ?>'>
+                                    <a href='<?= URLROOT . "/Product/details/" . $row->ProductPerLeverancierId . "?startDate=" . $data['startDate'] . "&endDate=" . $data['endDate'] ?>'>
                                         <i class="bi bi-question-lg"></i>
                                     </a>
                                 </td>  
@@ -68,11 +66,14 @@
                         <?php endforeach; ?>
                     <?php else : ?>
                         <tr>
-                            <td colspan="5" class="text-center">Geen gegevens gevonden voor de opgegeven datumbereik.</td>
+                            <td colspan="5" class="text-center">Er zijn geen leveringen geweest van producten in deze periode.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
+
+            <a href="<?= URLROOT; ?>/homepages/index">Homepage</a>
+        
         </div>
         <div class="col-2"></div>
     </div>

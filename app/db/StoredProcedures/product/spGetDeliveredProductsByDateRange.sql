@@ -8,7 +8,8 @@ CREATE PROCEDURE spGetDeliveredProductsByDateRange(
 )
 BEGIN
     SELECT
-        LEV.Id AS LeverancierId
+        PPL.Id AS ProductPerLeverancierId
+        ,LEV.Id AS LeverancierId
         ,LEV.Naam AS LeverancierNaam
         ,LEV.ContactPersoon AS LeverancierContactPersoon
         ,PROD.Id AS ProductId

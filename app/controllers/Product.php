@@ -11,16 +11,18 @@ class Product extends BaseController
 
     public function index($startDate = NULL, $endDate = NULL)
     {   
+        $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : '2000-01-01';
+        $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : date('Y-m-d');
+
         $data = [
-            'title' => 'Overzicht Allergenen',
+            'title' => 'Overzicht geleverde producten',
             'message' => NULL,
             'messageColor' => NULL,
             'messageVisibility' => 'none',
-            'dataRows' => NULL
+            'dataRows' => NULL,
+            'startDate' => $startDate,
+            'endDate' => $endDate
         ];
-
-        $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : '2000-01-01';
-        $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : date('Y-m-d');
 
         $result = $this->productModel->getDeliveredProductsByDateRange($startDate, $endDate);
 
@@ -37,5 +39,37 @@ class Product extends BaseController
         }
 
         $this->view('product/index', $data);
+    }
+
+    public function details($productPerLeverancierId)
+    {      
+        $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : '2000-01-01';
+        $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : date('Y-m-d');
+
+        $data = [
+            'title' => 'Specificatie geleverde producten',
+            'message' => NULL,
+            'messageColor' => NULL,
+            'messageVisibility' => 'none',
+            'dataRows' => NULL,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ];
+
+        $result = $this->productModel->deliveredProductsDetailsById($productPerLeverancierId);
+
+        if (is_null($result)) {
+            // Fout afhandelen
+            $data['message'] = "Er is een fout opgetreden in de database";
+            $data['messageColor'] = "danger";
+            $data['messageVisibility'] = "flex";
+            $data['dataRows'] = NULL;
+
+            header('Refresh:3; url=' . URLROOT . '/Homepages/index');
+        } else {
+            $data['dataRows'] = $result;
+        }
+
+        $this->view('product/details', $data);
     }
 }

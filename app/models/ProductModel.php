@@ -29,4 +29,18 @@ class ProductModel
         }
     }
 
+    public function deliveredProductsDetailsById($productPerLeverancierId)
+    {
+        try {
+            $sql = "CALL spDeliveredProductsDetailsById(:productPerLeverancierId)";
+            
+            $this->db->query($sql);
+            $this->db->bind(':productPerLeverancierId', $productPerLeverancierId, PDO::PARAM_INT);
+
+            return $this->db->resultSet();
+
+        } catch (Exception $e) {
+            logger(__LINE__, __METHOD__, __FILE__, $e->getMessage());            
+        }
+    }
 }
